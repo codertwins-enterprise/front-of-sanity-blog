@@ -1,3 +1,17 @@
+/*
+  0 - 600px:      Phone
+  600 - 900px:    Tablet portrait
+  900 - 1200px:   Tablet landscape
+  [1200 - 1800] is where our normal styles apply
+  1800px + :      Big desktop
+  $breakpoint arguement choices:
+  - phone
+  - tab-port
+  - tab-land
+  - big-desktop
+  ORDER: Base + typography > general layout + grid > page layout > components
+  1em = 16px
+*/
 *,
 *::before,
 *::after {
@@ -9,6 +23,19 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
+}
+
+@media only screen and (max-width: 75em) {
+  html {
+    background-color: red;
+    font-size: 56.25%;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  html {
+    font-size: 50%;
+  }
 }
 
 .container {
@@ -31,13 +58,41 @@ html {
   width: 62%;
 }
 
+@media only screen and (max-width: 75em) {
+  .navbar {
+    width: 90%;
+    margin: 2.5rem auto;
+    height: max-content;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .navbar {
+    width: 90%;
+    margin: 4rem auto;
+  }
+}
+
 .navbar .logo {
   font-size: 3.5rem;
+}
+
+@media only screen and (max-width: 75em) {
+  .navbar .logo {
+    margin-top: -.7rem;
+    font-size: 4.5rem;
+  }
 }
 
 .navbar a {
   text-decoration: none;
   color: #fff;
+}
+
+@media only screen and (max-width: 75em) {
+  .navbar .links__icon {
+    display: none;
+  }
 }
 
 .navbar .links ul {
@@ -60,6 +115,18 @@ html {
   font-family: "Josefin Sans", sans-serif;
 }
 
+@media only screen and (max-width: 75em) {
+  .navbar .links a {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .navbar .links a {
+    font-size: 2rem;
+  }
+}
+
 .blog-container {
   background: #f8f8f8;
   position: relative;
@@ -68,12 +135,24 @@ html {
   padding-bottom: 15rem;
 }
 
+@media only screen and (max-width: 75em) {
+  .blog-container {
+    padding: 0;
+  }
+}
+
 .blog-container .blog__posts {
   background-color: #fff;
   width: 62%;
   box-shadow: 0 30px 50px 0 rgba(1, 1, 1, 0.15);
   margin: 0 auto;
   margin-top: -10rem;
+}
+
+@media only screen and (max-width: 75em) {
+  .blog-container .blog__posts {
+    width: 100%;
+  }
 }
 
 .blog-container .blog__post {
@@ -133,7 +212,8 @@ html {
 }
 
 .blog-container .blog__post--button {
-  background-color: #087561;
+  background-color: #00b593;
+  border: 1px solid #00b593;
   padding: 1.4rem 5.3rem;
   font-family: "Josefin Sans", sans-serif;
   color: #fff;
@@ -145,6 +225,7 @@ html {
 .blog-container .blog__post--button:hover {
   box-shadow: 0 10px 20px 0 rgba(1, 1, 1, 0.15);
 }
+
 
 pre {
   background-color: #eee;
