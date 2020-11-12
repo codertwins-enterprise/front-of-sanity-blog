@@ -1,0 +1,286 @@
+// MEDIA QUERY MANAGER
+/*
+  0 - 600px:      Phone
+  600 - 900px:    Tablet portrait
+  900 - 1200px:   Tablet landscape
+  [1200 - 1800] is where our normal styles apply
+  1800px + :      Big desktop
+  $breakpoint arguement choices:
+  - phone
+  - tab-port
+  - tab-land
+  - big-desktop
+  ORDER: Base + typography > general layout + grid > page layout > components
+  1em = 16px
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint==phone {
+    @media only screen and (max-width: 37.5em) {
+      //600px
+      @content;
+    }
+  }
+
+  @if $breakpoint==tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    }
+
+    //900px
+  }
+
+  @if $breakpoint==tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+
+    //1200px
+  }
+
+  @if $breakpoint==big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+
+    //1800
+  }
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; // 10px/16px = 62.5% => 1rem = 10px
+
+  @include respond(tab-land) {
+    //1200px
+    background-color: red;
+    font-size: 56.25%; // 1rem = 9px, 9/16 = 50%
+  }
+
+  @include respond(tab-port) {
+    // width < 900?
+    font-size: 50%; //1 rem = 8px, 8/16 = 50%
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 22vh min-content;
+}
+
+.section {
+  position: relative;
+  z-index: 1;
+  background-image: linear-gradient(to right top,
+      rgb(0, 107, 201),
+      rgb(0, 142, 204),
+      rgb(0, 176, 204),
+      rgb(0, 204, 197),
+      rgb(0, 181, 147));
+
+
+}
+
+.navbar {
+  // background-color: yellowgreen;
+  display: flex;
+  align-items: center;
+  height: 5vh;
+  justify-content: space-between;
+  margin: 3.5rem auto;
+  width: 62%;
+
+  @include respond(tab-land) {
+    // max1200px
+    width: 90%;
+    margin: 2.5rem auto;
+    height: max-content;
+    // background-color: yellowgreen;
+  }
+
+  @include respond(tab-port) {
+    // width < 900?
+    width: 90%;
+    margin: 4rem auto;
+  }
+
+  .logo {
+    font-size: 3.5rem;
+
+    @include respond(tab-land) {
+      // max1200px
+      margin-top: -.7rem;
+      font-size: 4.5rem;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .links {
+
+    &__icon {
+
+      @include respond(tab-land) {
+        // max1200px
+        display: none;
+      }
+    }
+
+    ul {
+      display: flex;
+      text-transform: uppercase;
+      align-items: center;
+      list-style: none;
+      // background-color: red;
+    }
+
+    li {
+      padding: 1rem 1.6rem;
+
+      i {
+        font-size: 1.5rem;
+
+      }
+    }
+
+    a {
+      font-size: 1.2rem;
+      font-family: "Josefin Sans", sans-serif;
+
+      @include respond(tab-land) {
+        // max1200px
+        font-size: 2rem;
+      }
+
+      @include respond(tab-port) {
+        // width < 900?
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+.blog-container {
+  background: rgb(248, 248, 248);
+  position: relative;
+  display: flex;
+  z-index: 9000;
+  padding-bottom: 15rem;
+
+  @include respond(tab-land) {
+    padding: 0;
+  }
+
+  .blog__posts {
+    background-color: #fff;
+    width: 62%;
+    box-shadow: 0 30px 50px 0 rgba(1, 1, 1, 0.15);
+    margin: 0 auto;
+    margin-top: -10rem;
+
+    min-height: 100vh;
+
+    &__article {
+      margin-top: 5rem;
+      background-color: red;
+      padding: 3rem 5rem;
+      min-height: 80vh;
+    }
+
+    &--heading1 {
+      font-size: 5rem;
+    }
+
+    @include respond(tab-land) {
+      width: 100%;
+    }
+  }
+
+  .blog__post {
+    // background-color: beige;
+    width: 65%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: min-content min-content min-content min-content;
+    justify-items: flex-start;
+    padding: 5rem 2rem;
+    position: relative;
+    margin-bottom: 15rem;
+    margin-top: 10rem;
+    // background-color: red;
+
+    &--letter {
+      font-family: "Josefin Sans", sans-serif;
+      font-weight: 600;
+      font-size: 26rem;
+      position: absolute;
+      color: rgba(0, 0, 0, 0.07);
+      user-select: none;
+      left: -10%;
+      top: 0%;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .heading-2 {
+      font-family: "Roboto", sans-serif;
+      font-weight: 500;
+      font-size: 4.8rem;
+      text-transform: uppercase;
+      color: rgb(51, 51, 51);
+      letter-spacing: 0.1rem;
+    }
+
+    &--paragraph {
+      font-family: "Domine", serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 3rem;
+      margin: 2.5rem 0;
+    }
+
+    &--date {
+      font-family: "Domine", serif;
+      color: rgb(136, 136, 136);
+      margin-top: 1rem;
+      margin-left: 0.3rem;
+      font-size: 1.3rem;
+
+      a {
+        font-family: "Domine", serif;
+        color: rgb(136, 136, 136);
+        text-decoration: none;
+
+        // &:hover {
+        //   border-bottom: 1px solid rgba(136, 136, 136, 0.23);
+        // }
+      }
+    }
+
+    &--button {
+      background-color: rgb(0, 181, 147);
+      border: 1px solid rgb(0, 181, 147);
+      padding: 1.4rem 5.3rem;
+      font-family: "Josefin Sans", sans-serif;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 1.2rem;
+
+      &:hover {
+        box-shadow: 0 10px 20px 0 rgba(1, 1, 1, 0.15);
+      }
+    }
+  }
+}

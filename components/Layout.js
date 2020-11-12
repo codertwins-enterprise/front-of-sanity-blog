@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import Navbar from './Navbar'
 
 export default function Layout({ children, title }) {
@@ -13,7 +12,7 @@ export default function Layout({ children, title }) {
         <link href="https://fonts.googleapis.com/css2?family=Domine&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
         <script src="https://kit.fontawesome.com/d0d9868073.js" crossOrigin="anonymous"></script>
-        <title> {title} </title>
+        <title>{title}</title>
         <meta name="google-site-verification" content="FKApUNhSKv1SfKXC0nsKio99Qtsrbrphx8v-DMLdCv4" />
       </Head>
       <main className="container">
@@ -22,11 +21,11 @@ export default function Layout({ children, title }) {
         {/** Navbar END*/}
 
         {/** Blog Container */}
-        <section className="blog-container">
+        {children}
+        {/* <section className="blog-container">
           <div className="blog__posts">
-            {children}
           </div>
-        </section>
+        </section> */}
         {/** Blog Container END */}
       </main>
     </>

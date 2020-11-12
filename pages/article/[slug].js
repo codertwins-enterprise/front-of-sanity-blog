@@ -13,18 +13,27 @@ const Post = (props) => {
 
   return (
     <Layout title={title}>
-      <h1>{title}</h1>
-      <span>By {name}</span>
-      {categories && (
-        <ul>
-          Posted in
-          {categories.map(category => <li key={category}>{category}</li>)}
-        </ul>
-      )}
-      <BlockContent
-        blocks={body}
-        {...client.config()}
-      />
+      <section className="blog-container">
+        <div className="blog__posts">
+          <div className="blog__post">
+            <div class="blog__post--letter">{title[0]}</div>
+            <h1 className="heading-2">{title}</h1>
+            <span className="blog__post--date">
+              By {name} / 
+              {categories && (
+                <>
+                  In
+                  {categories.map(category => <span> {category}</span>)}
+                </>
+            )}
+            </span>
+            <BlockContent
+              blocks={body}
+              {...client.config()}
+            />
+          </div>          
+        </div>
+      </section>      
     </Layout>
   )
 }
