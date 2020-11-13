@@ -11,24 +11,35 @@ const Post = (props) => {
     body = []
   } = props
 
+  const serializers = {
+    types: {
+      block: props => (
+        <p className="blog__post--paragraph">
+          {props.children}
+        </p>
+      )
+    }
+  }
+
   return (
     <Layout title={title}>
       <section className="blog-container">
         <div className="blog__posts">
           <div className="blog__post">
-            <div class="blog__post--letter">{title[0]}</div>
+            <div className="blog__post--letter">{title[0]}</div>
             <h1 className="heading-2">{title}</h1>
             <span className="blog__post--date">
               By {name} / 
               {categories && (
                 <>
                   In
-                  {categories.map(category => <span> {category}</span>)}
+                  {categories.map((category, index) => <span key={index}> {category}</span>)}
                 </>
             )}
             </span>
             <BlockContent
               blocks={body}
+              serializers={serializers}
               {...client.config()}
             />
           </div>          
